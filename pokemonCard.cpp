@@ -14,7 +14,40 @@ void PokemonCard::displayInfo() {
     std::cout<<"Pokemon card - Name:"<< getCardName() <<", Type:"<< pokemonType <<", Evolution Level:"<< evolutionLevel <<" of the family "<< familyName <<", HP:"<< hp <<endl<<"Attacks: "<<endl;
     int attackNumber = 0;
     for(const auto& attack : attacks){
-        std::cout<<"Attack #"<<attackNumber++<<":"<<endl<<"Attack cost:"<<get<0>(attack) <<endl<<", Name:"<< get<2>(attack) <<", Damage:"<< get<3>(attack) <<std::endl;
+        std::cout<<"Attack #"<<attackNumber++<<":"<<endl<<"Attack cost:"<<get<0>(attack) <<endl<<"Attack current energy storage: "<<get<1>(attack)<<endl<<"Attack description:"<< get<2>(attack) <<endl<<"Attack damage:"<< get<3>(attack) <<std::endl;
     }
     std::cout << std::endl;
+}
+
+void PokemonCard::addEnergy() {
+    for (auto& attack : attacks) {
+        int& currentEnergy = std::get<1>(attack);
+        currentEnergy++;
+    }
+}
+
+int PokemonCard::getnumberOfAttacks() const {
+    return attacks.size();
+}
+
+void PokemonCard::reduceHP(int damage) {
+    hp -= damage;
+    if (hp < 0) {
+        hp = 0;
+    }
+} 
+
+bool PokemonCard::isKO() const {
+    return hp <= 0;
+}
+
+void PokemonCard::reduceEnergy(int energyCost) {
+    for (auto& attack : attacks) {
+        int& currentEnergy = std::get<1>(attack);
+        if (currentEnergy >= energyCost) {
+            currentEnergy -= energyCost;
+        } else {
+            currentEnergy = 0;
+        }
+    }
 }

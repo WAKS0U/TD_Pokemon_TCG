@@ -19,5 +19,7 @@ public:
     void attachEnergyCard(int,int);
     void displayBench();
     void displayAction();
+    void attack(int, int , Player& , int);
+    void useTrainerCard(int);
 };
 #endif

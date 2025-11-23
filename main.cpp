@@ -23,5 +23,27 @@ int main(){
     player1.displayBench();
     cout << endl;
     player1.displayAction();
+
+    Player player2("Germain");
+
+    player2.addCardToBench(new EnergyCard("Grass"));
+    player2.addCardToBench(new TrainerCard("Brock","heal all your action pokemon"));
+    player2.addCardToBench(new PokemonCard("Bulbasaur","Grass","Bulbasaur",1,100,2,"Leech Seed", 15,3,"Vine Whip", 25));
+
+    player2.activatePokemonCard(2);
+    player2.attachEnergyCard(0,0);
+
+    cout << endl;
+    player2.displayBench();
+    cout << endl;
+    player2.displayAction();
+
+    player1.attack(0,0,player2,0);
+    cout << endl;
+    player2.displayAction();
+    player2.useTrainerCard(0);
+    cout << endl;
+    player2.displayAction();
+    
     return 0;
 }
